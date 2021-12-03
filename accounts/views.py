@@ -60,15 +60,16 @@ def login(request):
         profile_obj = Profile.objects.filter(user=user_obj).first()
 
         if not profile_obj:
-            messages.add_message(request, messages.INFO, 'No such accont exists')
+            messages.add_message(request, messages.INFO,
+                                 'No such accont exists')
             return render(request, "accounts/login.html", context)
-        
+
         user = authenticate(username=username, password=password)
-        
+
         if user is None:
             messages.add_message(request, messages.INFO, 'Wrong password')
             return render(request, "accounts/login.html", context)
-        
+
         lg(request, user)
         return redirect('login')
     else:
@@ -78,8 +79,27 @@ def login(request):
 
         return render(request, "accounts/login.html", context)
 
+
 def logout(request):
     if not request.user.is_authenticated:
         return redirect("login")
     logt(request)
     return redirect("login")
+
+
+def data(request):
+    if request.method == "POST":
+        age = request.POST.get("age")
+        weight = request.POST.get("weight")
+        height = request.POST.get("height")
+        sex = request.POST.get("sex")
+        print(age)
+        print(weight)
+        print(height)
+        print(sex)
+        return redirect("data")
+    else:
+        context = {
+            "title": "Daily Miles",
+        }
+        return render(request, "accounts/data.html", context)
