@@ -1,3 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse, redirect
 
-# Create your views here.
+def home(request):
+    context = {
+        "title": "ML-TOOLBOX"
+    }
+    return render(request, 'accounts/home.html', context)
+
