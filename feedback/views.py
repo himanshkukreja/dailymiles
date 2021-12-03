@@ -17,16 +17,6 @@ def feedback(request):
             "contact": contact 
         }
 
-        if User.objects.filter(username=username).first():
-            messages.add_message(request, messages.INFO, 'username exist')
-            return render(request, "accounts/home.html", context)
-        elif User.objects.filter(email=email).first():
-            messages.add_message(request, messages.INFO, 'email exist')
-            return render(request, "accounts/home.html", context)
-
-        user_obj = User(username=username, email=email)
-        user_obj.set_password(password)
-        user_obj.save()
 
         profile_obj = Profile.objects.create(user=user_obj)
         profile_obj.save()
@@ -37,11 +27,5 @@ def feedback(request):
             "title": "Daily Miles"
         }
 
-        return render(request, 'accounts/home.html', context)
+        return render(request, 'feedback/feedback.html', context)
 
-
-def login(request):
-    context = {
-        "title": "Daily Miles",
-    }
-    return render(request, "accounts/login.html", context)
