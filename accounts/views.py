@@ -4,6 +4,8 @@ import json
 from .models import Profile
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.contrib.auth import logout as logt
+from django.contrib.auth import authenticate, login as lg
 
 
 def home(request):
@@ -41,7 +43,43 @@ def home(request):
 
 
 def login(request):
-    context = {
-        "title": "Daily Miles",
-    }
-    return render(request, "accounts/login.html", context)
+    if request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+
+        context = {
+            "username": username,
+            "password": password
+        }
+
+        user_obj = User.objects.filter(username=username).first()
+        if user_obj is None:
+            messages.add_message(request, messages.INFO, 'Username not found')
+            return render(request, "accounts/login.html", context)
+
+        profile_obj = Profile.objects.filter(user=user_obj).first()
+
+        if not profile_obj:
+            messages.add_message(request, messages.INFO, 'No such accont exists')
+            return render(request, "accounts/login.html", context)
+        
+        user = authenticate(username=username, password=password)
+        
+        if user is None:
+            messages.add_message(request, messages.INFO, 'Wrong password')
+            return render(request, "accounts/login.html", context)
+        
+        lg(request, user)
+        return redirect('login')
+    else:
+        context = {
+            "title": "Daily Miles",
+        }
+
+        return render(request, "accounts/login.html", context)
+
+def logout(request):
+    if not request.user.is_authenticated:
+        return redirect("login")
+    logt(request)
+    return redirect("login")
