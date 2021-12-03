@@ -25,7 +25,7 @@ SECRET_KEY = '*zpynz*8nkil4getg*+7c(%o%m06x7%oq)$@b^)o29s=-fz#@k'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1','dailymiles.herokuapp.com/']
 
 
 # Application definition
