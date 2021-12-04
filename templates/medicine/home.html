@@ -1,0 +1,78 @@
+{% extends 'medicine/base.html' %}
+{% load static %}
+
+{% block title %}{{title}}{% endblock %}
+
+
+{% block css %}{%endblock%}
+
+
+
+{% block body%}
+<div class="page-content bg-white">
+    <!-- inner page banner -->
+    <div class="dlab-bnr-inr overlay-black-middle text-center bg-pt"
+        style="background-image:url(/static/images/banner.jpg);">
+        <div class="container">
+            <div class="dlab-bnr-inr-entry align-m text-center">
+                <h1 class="text-white">Products</h1>
+                <!-- Breadcrumb row -->
+                <div class="breadcrumb-row">
+                    <ul class="list-inline">
+                        <li><a href="{%url 'dashboard'%}">Home</a></li>
+                        <li>Products</li>
+                    </ul>
+                </div>
+                <!-- Breadcrumb row END -->
+            </div>
+        </div>
+    </div>
+    <!-- inner page banner END -->
+    <div class="bg-white lightgallery" id="lightgallery">
+        <div class="section-full bg-white content-inner">
+            <div class="container">
+                <div class="row">
+
+
+                    <div class="col-lg-12">
+                        <div class="sort-title clearfix text-center">
+                            <h4>Resouces</h4>
+                        </div>
+                        <!-- Images overlay & content on hover -->
+                        <div class="section-content box-sort-in button-example">
+                            <div class="row">
+
+                                {%for data in allData%}
+                                <div class="col-lg-4 col-md-6 col-sm-12 m-b15">
+                                    <div class="dlab-box">
+                                        <div class="dlab-media dlab-img-overlay11 dlab-img-effect zoom"> <img
+                                                src="{{data.img}}" alt="">
+                                            <div class="overlay-bx">
+                                                <div class="overlay-icon">
+                                                    <span data-exthumbimage="{{data.img}}" data-src="{{data.img}}" class="check-km" title="{{data.name}}">
+                                                        <i class="fa fa-picture-o icon-bx-xs"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="text-center">
+                                            <a href="{{data.link}}" target="_blank">{{data.name}}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                {%endfor%}
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}
+
+
+
+{% block script %}{%endblock%}
