@@ -71,7 +71,7 @@ def login(request):
             return render(request, "accounts/login.html", context)
 
         lg(request, user)
-        return redirect('login')
+        return redirect('dashboard')
     else:
         context = {
             "title": "Daily Miles",
@@ -88,18 +88,64 @@ def logout(request):
 
 
 def data(request):
+    if not request.user.is_authenticated:
+        return redirect("login")
+
     if request.method == "POST":
         age = request.POST.get("age")
         weight = request.POST.get("weight")
         height = request.POST.get("height")
         sex = request.POST.get("sex")
-        print(age)
-        print(weight)
-        print(height)
-        print(sex)
-        return redirect("data")
+
+        obj = Profile.objects.filter(user=request.user).first()
+        obj.age = age
+        obj.weight = weight
+        obj.height = height
+        obj.sex = sex
+
+        obj.save()
+
+        return redirect("dashboard")
     else:
+        obj = Profile.objects.filter(user=request.user).first()
+
         context = {
             "title": "Daily Miles",
+            "sex": obj.sex,
+            "age": obj.age,
+            "height": obj.height,
+            "weight": obj.weight,
         }
+
         return render(request, "accounts/data.html", context)
+
+
+def dashboard(request):
+    if not request.user.is_authenticated:
+        return redirect("login")
+
+    obj = Profile.objects.filter(user=request.user).first()
+
+    context = {
+        "title": "Daily Miles",
+        "sex": obj.sex,
+        "age": obj.age,
+        "height": obj.height,
+        "weight": obj.weight,
+        "bmi": "None",
+        "verdict": "None",
+    }
+
+    if obj.height and obj.weight:
+        context["bmi"] = obj.weight / (obj.height * obj.height)
+
+        if context["bmi"] < 18.5:
+            context["verdict"] = "Underweight"
+        elif context["bmi"] < 25:
+            context["verdict"] = "Healthy Weight"
+        elif context["bmi"] < 30:
+            context["verdict"] = "Overweight"
+        else:
+            context["verdict"] = "Obesity"
+
+    return render(request, "accounts/dashboard.html", context)

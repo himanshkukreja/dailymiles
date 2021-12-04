@@ -10,7 +10,7 @@ class Profile(models.Model):
     age = models.IntegerField(blank=True, null=True)
     weight = models.FloatField(blank=True, null=True)
     height = models.FloatField(blank=True, null=True)
-    sex = models.IntegerField(blank=True, null=True)
+    sex = models.IntegerField(default=1)
     isAdmin = models.BooleanField(default=False)
 
     def __str__(self):
