@@ -9,12 +9,12 @@ from django.contrib import messages
 def feedback(request):
     if request.method == "POST":
 
-        if not request.user.is_authenticated():
+        if not request.user.is_authenticated:
             return redirect("login")
 
         msg = request.POST.get("msg")
 
-        user = User.objects.get(pk=request.user)
+        user = User.objects.filter(username=request.user).first()
         feedback_obj = FeedbackMsg.objects.create(user=user, msg=msg)
         feedback_obj.save()
 

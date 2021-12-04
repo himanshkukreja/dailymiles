@@ -70,7 +70,10 @@
                         <div class="header-nav navbar-collapse collapse justify-content-end" id="navbarNavDropdown">
                             <ul class="nav navbar-nav">
                                 <li> <a href="{%url 'accounts'%}">Home</a></li>
+                                <li> <a href="{%url 'resources'%}">Resources</a></li>
                                 {%if user.is_authenticated%}
+                                <li><a href="{%url 'dashboard'%}">Dashboard</a></li>
+                                <li><a href="{%url 'feedback'%}">Feedback</a></li>
                                 <li><a href="{%url 'logout'%}">Logout</a></li>
                                 {%endif%}
                             </ul>

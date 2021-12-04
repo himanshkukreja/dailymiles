@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 class FeedbackMsg(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    msg = models.FloatField(blank=True, null=True)
+    msg = models.TextField(blank=True, null=True)
     
     def __str__(self):
-        return self.user.username
+        return self.msg
