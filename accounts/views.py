@@ -149,3 +149,18 @@ def dashboard(request):
             context["verdict"] = "Obesity"
 
     return render(request, "accounts/dashboard.html", context)
+
+
+def trainingMode(request):
+    context = {
+        "title": "Daily Miles",
+    }
+
+    return render(request, "accounts/training.html", context)
+
+
+def prescription(request):
+    context = {
+        "title": "Daily Miles",
+    }
+    return render(request, "accounts/prescription.html", context)
