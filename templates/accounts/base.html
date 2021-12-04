@@ -71,6 +71,7 @@
                             <ul class="nav navbar-nav">
                                 <li> <a href="{%url 'accounts'%}">Home</a></li>
                                 {%if user.is_authenticated%}
+                                <li><a href="{%url 'dashboard'%}">Dashboard</a></li>
                                 <li><a href="{%url 'logout'%}">Logout</a></li>
                                 {%endif%}
                             </ul>
