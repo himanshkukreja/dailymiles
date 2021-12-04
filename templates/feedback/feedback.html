@@ -24,11 +24,13 @@
                 <div class="col-lg-12 m-b30">
                     <div class="p-a30 border-1  max-w500 m-auto">
                         <div class="tab-content">
-                            <form id="feedback" class="tab-pane active" onsubmit="return false;"  action="{%url 'feedback'%}" method="POST"> {%csrf_token%}>
+                            <form id="feedback" class="tab-pane active" onsubmit="return false;"
+                                action="{%url 'feedback'%}" method="POST"> {%csrf_token%}>
                                 <h4 class="font-weight-700"> We make sure to reach you ASAP!</h4>
                                 <p class="font-weight-600">If you have an account with us, please <a
                                         href="{%url 'login'%}" class="text-red">log in</a>.</p>
                                 <div class="form-group">
+<<<<<<< HEAD
                                     <label class="font-weight-700">Your Good Name *</label>
                                     <input required="" class="form-control" placeholder="Name" type="text"
                                         id="username" name='username'>
@@ -41,6 +43,11 @@
                                 <div class="form-group">
                                     <label class="font-weight-700">Your Concern</label>
                                     <textarea id="feedbacktext" rows="5" cols = "50" name="msg">Enter your Message Here </textarea> 
+=======
+                                    <label class="font-weight-700">Your Concern</label>
+                                    <textarea name="msg" rows="5" cols="50"
+                                        class="form-control">Enter Feedback</textarea>
+>>>>>>> 62cf174b8e16e752cd909ee81a49440122f1c507
                                 </div>
                                 <div class="text-center m-t15" id="save">
                                     <button class="site-button button-lg radius-no outline outline-2"
