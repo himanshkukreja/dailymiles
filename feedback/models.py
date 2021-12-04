@@ -9,7 +9,7 @@ class feedbackmsg(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     username = models.IntegerField(blank=True, null=True)
     contact = models.FloatField(blank=True, null=True)
-    message = models.FloatField(blank=True, null=True)
+    msg = models.FloatField(blank=True, null=True)
     
     def __str__(self):
         return self.user.username

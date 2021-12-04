@@ -1,7 +1,7 @@
 from django.contrib.messages import constants
 from django.shortcuts import render, HttpResponse, redirect
 import json
-from .models import Profile
+from .models import feedbackmsg
 from django.contrib.auth.models import User
 from django.contrib import messages
 
@@ -17,9 +17,10 @@ def feedback(request):
             "contact": contact 
         }
 
+        feedback_obj = User(username=username, contact=contact, msg=msg)
 
-        profile_obj = Profile.objects.create(user=user_obj)
-        profile_obj.save()
+        feedback_obj = feedbackmsg.objects.create(user=user_obj)
+        feedback_obj.save()
 
         return redirect("login")
     else:
